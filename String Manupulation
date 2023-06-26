@@ -1,0 +1,54 @@
+/*Input--> Good Better Best
+output--> BG*/
+
+import java.util.*;
+class ShortString{
+	public static String pick(String str){
+		StringBuilder sb=new StringBuilder("");
+		sb.append(str.charAt(0));
+		for(int i=1;i<str.length()-1;i++){
+			if(str.charAt(i)==' '){
+				sb.append(str.charAt(i+1));
+			}
+		}
+		return sb.toString();
+	}
+	public static String shorting(String str){
+		String a=pick(str);
+		//convert string into array;
+		char[] ch=new char[a.length()];
+		for(int i=0;i<ch.length;i++){
+			ch[i]=a.charAt(i);
+		}
+		//Shorting array;
+		for(int i=0;i<ch.length-1;i++){
+			for(int j=0;j<ch.length-1-i;j++){
+				if(ch[j]>ch[j+1]){
+					char temp=ch[j];
+					ch[j]=ch[j+1];
+					ch[j+1]=temp;
+				}
+			}
+		}
+		//convert Shorted array to string;
+		String str1=new String(ch);
+		return str1;
+	}
+	public static String deleat(String str){
+		StringBuilder sb=new StringBuilder("");
+		String c=shorting(str);
+		for(int i=0;i<c.length()-1;i++){
+				if(c.charAt(i)!=c.charAt(i+1)){
+					sb.append(c.charAt(i));
+				}
+		}
+		sb.append(c.charAt(c.length()-1));
+		return sb.toString();
+	}
+	public static void main(String[] args){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the sentance:: ");
+		String str=sc.nextLine();
+		System.out.println("THe new Desier string is:: "+deleat(str));	
+	}
+}
